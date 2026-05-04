@@ -15,6 +15,7 @@ References available from:
 
 ## Pipeline Steps
 
+
 ### 1. Reconstruct Tomograms
 
 Reconstruct tomograms in AreTomo or IMOD.
@@ -31,7 +32,6 @@ Pick coordinates in IMOD and save as a `.mod` file (each microtubule as a new co
 
 ```bash
 subm newst.com
-./subm_newst_all.sh  # automated
 ```
 
 ---
@@ -48,7 +48,6 @@ Edit `tilt.com`:
 
 ```bash
 subm tilt.com
-./subm_tilt_all.sh  # still need to edit the tilt.com files
 ```
 
 ---
@@ -63,11 +62,11 @@ imodtrans -2 AreTomo3Output/WT_tomo01.mrc_Imod/WT_tomo01.mrc_st.xf \
 
 ---
 
-### 6. PEET ? Add Mod Points
+### 6. PEET Add Mod Points
 
 ```bash
-addModPts TS_01_MT_picking.mod 9.5
-# Dimer distance in pixels ? adjust depending on pixel size
+addModPts WT_tomo01_unbinned.mod 9.5
+# Dimer distance in pixels, adjust depending on pixel size
 ```
 
 ---
@@ -97,6 +96,7 @@ boxstartend \
 ### 9. Rescale MiRP References to Match Subtomograms
 
 ```bash
+relion_helix_toolbox \
   --i 11pf_syn_ref_tubulin_only_6A_5-56Apix.mrc \
   --o 11pf_syn_ref_tubulin_only_lpf20_2p21Apix_box_300.mrc \
   --rescale_angpix 2.21 \
@@ -149,7 +149,7 @@ python reference_stack_rot_av.py
 ### 14. Make RELION 3 Particle `.star` from `.mod`
 
 ```bash
-python /data2A/shared/microtubule/scripts/scripts/imod_model_to_rln3_star_file_per_MT.py
+python imod_model_to_rln3_star_file_per_MT.py
 ```
 
 ---
